@@ -1,0 +1,166 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+  --font-inter: 'Inter', system-ui, sans-serif;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: #0A0A0A;
+    color: #F0EBE3;
+    font-family: var(--font-inter);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-cormorant);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+
+  ::selection {
+    background-color: #C8A96E;
+    color: #0A0A0A;
+  }
+}
+
+@layer components {
+  .container-luxury {
+    @apply max-w-7xl mx-auto px-6 md:px-10 lg:px-16;
+  }
+
+  .section-padding {
+    @apply py-20 md:py-28 lg:py-36;
+  }
+
+  .heading-display {
+    @apply font-serif text-5xl md:text-6xl lg:text-7xl font-light tracking-tight text-text;
+  }
+
+  .heading-section {
+    @apply font-serif text-4xl md:text-5xl font-light tracking-tight text-text;
+  }
+
+  .heading-card {
+    @apply font-serif text-2xl md:text-3xl font-light text-text;
+  }
+
+  .label-gold {
+    @apply text-gold text-xs tracking-widest uppercase font-sans font-medium;
+  }
+
+  .body-large {
+    @apply text-lg md:text-xl text-muted leading-relaxed font-sans;
+  }
+
+  .body-base {
+    @apply text-base text-muted leading-relaxed font-sans;
+  }
+
+  .divider {
+    @apply border-t border-border;
+  }
+
+  .gold-line {
+    @apply w-12 h-px bg-gold;
+  }
+
+  /* Buttons */
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2
+           bg-gold text-background
+           px-8 py-4
+           text-sm tracking-widest uppercase font-sans font-medium
+           transition-all duration-300
+           hover:bg-gold-light
+           focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-background
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2
+           border border-gold text-gold
+           px-8 py-4
+           text-sm tracking-widest uppercase font-sans font-medium
+           transition-all duration-300
+           hover:bg-gold hover:text-background
+           focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-background
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2
+           border border-border text-muted
+           px-8 py-4
+           text-sm tracking-widest uppercase font-sans font-medium
+           transition-all duration-300
+           hover:border-gold hover:text-gold
+           focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-background;
+  }
+
+  /* Form inputs */
+  .input-luxury {
+    @apply w-full bg-surface border border-border
+           text-text placeholder:text-muted
+           px-5 py-4 text-base
+           transition-all duration-200
+           focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold;
+  }
+
+  .textarea-luxury {
+    @apply w-full bg-surface border border-border
+           text-text placeholder:text-muted
+           px-5 py-4 text-base resize-none
+           transition-all duration-200
+           focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold;
+  }
+
+  /* Cards */
+  .card-surface {
+    @apply bg-surface border border-border;
+  }
+
+  /* Image placeholders */
+  .img-placeholder {
+    @apply w-full bg-surface-2 flex items-center justify-center;
+    background-image: linear-gradient(135deg, #1C1916 0%, #141414 50%, #1C1916 100%);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out both;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
