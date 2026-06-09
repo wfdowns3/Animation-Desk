@@ -3,11 +3,16 @@ import Stripe from 'stripe'
 import { supabaseAdmin } from '@/lib/supabase'
 import { Resend } from 'resend'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2024-06-20',
-})
+function getStripe() {
+  return new Stripe(process.env.STRIPE_SECRET_KEY!, {
+    apiVersion: '2024-06-20',
+  })
+}
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+function getResend() {
+  return new Resend(process.env.RESEND_API_KEY)
+}
+
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://animationdesk.com'
 
 // In the App Router, body parsing is not automatic — request.text() gives us the raw body.
@@ -29,6 +34,7 @@ export async function POST(request: NextRequest) {
 
   try {
     const rawBody = await request.text()
+    const stripe = getStripe()
     event = stripe.webhooks.constructEvent(rawBody, signature, webhookSecret)
   } catch (err) {
     console.error('[webhook] Signature verification failed:', err)
@@ -100,6 +106,7 @@ export async function POST(request: NextRequest) {
           // Send confirmation email to customer
           try {
             if (process.env.RESEND_API_KEY) {
+              const resend = getResend()
               const amountDollars = (session.amount_total ?? 0) / 100
 
               await resend.emails.send({

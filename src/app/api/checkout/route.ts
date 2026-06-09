@@ -2,14 +2,17 @@ import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { supabaseAdmin } from '@/lib/supabase'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2024-06-20',
-})
+function getStripe() {
+  return new Stripe(process.env.STRIPE_SECRET_KEY!, {
+    apiVersion: '2024-06-20',
+  })
+}
 
 const VALID_AMOUNTS = [1000, 2500] // in USD dollars (not cents)
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://animationdesk.com'
 
 export async function POST(request: NextRequest) {
+  const stripe = getStripe()
   try {
     const body = await request.json()
     const { name, email, amount } = body

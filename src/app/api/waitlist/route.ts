@@ -54,6 +54,7 @@ export async function POST(request: NextRequest) {
     // Send welcome email via Resend (non-blocking — don't fail signup if email fails)
     try {
       if (process.env.RESEND_API_KEY) {
+        const resend = getResend()
         await resend.emails.send({
           from: 'Animation Desk <hello@animationdesk.com>',
           to: normalizedEmail,

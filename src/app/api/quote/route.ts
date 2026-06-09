@@ -2,7 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { supabaseAdmin } from '@/lib/supabase'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+function getResend() {
+  return new Resend(process.env.RESEND_API_KEY)
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -63,6 +65,7 @@ export async function POST(request: NextRequest) {
     // Notify founder via Resend (non-blocking)
     try {
       if (process.env.RESEND_API_KEY) {
+        const resend = getResend()
         await resend.emails.send({
           from: 'Animation Desk <hello@animationdesk.com>',
           to: 'hello@animationdesk.com',
