@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
         await resend.emails.send({
           from: 'Animation Desk <hello@animationdesk.com>',
           to: 'hello@animationdesk.com',
-          replyTo: normalizedEmail,
+          reply_to: normalizedEmail,
           subject: `Quote request from ${institution.trim()}`,
           html: `
 <p><strong>New institutional quote request</strong></p>

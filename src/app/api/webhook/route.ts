@@ -10,12 +10,8 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 const resend = new Resend(process.env.RESEND_API_KEY)
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://animationdesk.com'
 
-// Disable body parsing — Stripe requires the raw body for signature verification
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-}
+// In the App Router, body parsing is not automatic — request.text() gives us the raw body.
+// No special config needed; this replaces the Pages Router bodyParser: false config.
 
 export async function POST(request: NextRequest) {
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET
